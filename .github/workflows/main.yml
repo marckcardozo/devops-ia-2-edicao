@@ -30,7 +30,16 @@ jobs:
             with:
               username: ${{ vars.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
-            
+              
+          - name: Build and push
+            uses: docker/build-push-action@v6
+            with:
+              push: true
+              tags: mmoraesc/bootcamp-encontros-tech:v${{ github.run_number }}
+              file: ./02-encontros-tech/Dockerfile
+              context: ./02-encontros-tech
+
+
           - run: echo "Executar o Docker build"
           - run: echo " Enviar  a imagem Docker para o Docker Hub"
     CD:
